@@ -2,69 +2,100 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>Můj budoucí cash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Blbosti | Neal.fun Style</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f0f0f0; padding: 50px; }
-        .money { font-size: 3rem; color: green; font-weight: bold; }
-        .item { background: white; padding: 20px; border-radius: 10px; display: inline-block; margin: 10px; shadow: 2px 2px 10px rgba(0,0,0,0.1); }
-        button { padding: 10px 20px; font-size: 1.2rem; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
-        button:disabled { background: #ccc; }
-        .kofi { margin-top: 50px; font-size: 0.8rem; color: #666; }
+        :root { --bg: #f0f2f5; --card: #ffffff; --text: #1d1d1f; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        h1 { font-size: 3rem; margin-bottom: 40px; }
+        
+        /* Mřížka s hrama */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; }
+        .card { background: var(--card); border-radius: 20px; padding: 20px; text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card img { width: 80px; height: 80px; margin-bottom: 10px; }
+        .card h3 { margin: 10px 0; font-size: 1.5rem; }
+
+        /* Sekce hry (schovaná na začátku) */
+        #game-section { display: none; width: 100%; max-width: 800px; text-align: center; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .back-btn { background: #eee; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-bottom: 20px; font-weight: bold; }
+
+        /* Podpora a Feedback dole */
+        .footer { margin-top: 100px; text-align: center; }
+        .support-btn { background: #ffdd00; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 221, 0, 0.4); margin: 10px; }
+        .feedback-btn { background: #007aff; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; font-size: 1.1rem; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; }
+        
+        #qr-display { display: none; margin-top: 20px; }
+        #qr-display img { width: 250px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
-    <h1>Utrácej svoje budoucí prachy</h1>
-    <div class="money">Kč <span id="balance">1000000</span></div>
-    
-    <div class="item">
-        <h3>Předraženej burger</h3>
-        <p>Cena: 500 Kč</p>
-        <button onclick="buy(500)">Koupit</button>
+
+    <div id="main-menu">
+        <h1>Moje Projekty</h1>
+        <div class="grid">
+            <div class="card" onclick="openGame('spend-money')">
+                <div style="font-size: 50px;">💸</div>
+                <h3>Utrácej milióny</h3>
+                <p>Kolik dokážeš rozházet?</p>
+            </div>
+            
+            <div class="card" style="opacity: 0.5; cursor: default;">
+                <div style="font-size: 50px;">🔒</div>
+                <h3>Další blbost</h3>
+                <p>Už brzy...</p>
+            </div>
+        </div>
     </div>
 
-    <div class="item">
-        <h3>iPhone z bazaru</h3>
-        <p>Cena: 15000 Kč</p>
-        <button onclick="buy(15000)">Koupit</button>
+    <div id="game-section">
+        <button class="back-btn" onclick="goHome()">← Zpět na menu</button>
+        <div id="game-content">
+            <h1>Utrácej prachy</h1>
+            <div style="font-size: 3rem; color: green; font-weight: bold;">Kč <span id="balance">1000000</span></div>
+            <div style="margin-top: 20px;">
+                <button onclick="buy(500)" style="padding: 15px; font-size: 1rem; cursor:pointer;">Burger (500 Kč)</button>
+                <button onclick="buy(15000)" style="padding: 15px; font-size: 1rem; cursor:pointer;">iPhone (15k Kč)</button>
+            </div>
+        </div>
     </div>
 
-  <style>
-    .support-btn {
-        background: #ffdd00;
-        color: black;
-        padding: 15px 25px;
-        border-radius: 50px;
-        font-weight: bold;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        transition: transform 0.2s;
-    }
-    .support-btn:hover { transform: scale(1.1); }
-    #qr-container { display: none; margin-top: 20px; }
-</style>
-
-<div style="margin-top: 50px;">
-    <button class="support-btn" onclick="document.getElementById('qr-container').style.display='block'">
-        🎁 Chceš mě podpořit?
-    </button>
-    
-    <div id="qr-container">
-        <p>Díky moc! Stačí naskenovat v bankovní aplikaci:</p>
-        <img src="qr.jpeg" style="width: 200px; border: 5px solid white; border-radius: 10px;">
-        <p><strong>Částku si zvol sám :)</strong></p>
+    <div class="footer">
+        <h3>Podpoř mě</h3>
+        <button class="support-btn" onclick="toggleQR()">🎁 Darovat korunku</button>
+        <a href="mailto:jinlongjou@gmail.com" class="feedback-btn">📧 Mám nápad / Nahlásit chybu</a>
+        
+        <div id="qr-display">
+            <img src="qr.jpeg" alt="qr.jpeg">
+        </div>
     </div>
-</div>
 
     <script>
         let money = 1000000;
+
         function buy(price) {
             if (money >= price) {
                 money -= price;
                 document.getElementById('balance').innerText = money;
             } else {
-                alert("Jsi švorc, kámo!");
+                alert("Jsi švorc!");
             }
+        }
+
+        function openGame(gameId) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('game-section').style.display = 'block';
+        }
+
+        function goHome() {
+            document.getElementById('main-menu').style.display = 'block';
+            document.getElementById('game-section').style.display = 'none';
+        }
+
+        function toggleQR() {
+            let qr = document.getElementById('qr-display');
+            qr.style.display = (qr.style.display === 'block') ? 'none' : 'block';
         }
     </script>
 </body>
