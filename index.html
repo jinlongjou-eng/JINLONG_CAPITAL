@@ -60,7 +60,7 @@
 
     <div id="game-spend" class="page">
         <button class="btn" onclick="showPage('home')">← Zpět</button>
-        <div class="balance-display">Kč <span id="balance-spend">10000000000</span></div>
+        <div class="balance-display">Kč <span id="balance-spend">1000000</span></div>
         <div class="shop-grid" id="shop">
             </div>
     </div>
@@ -82,12 +82,11 @@
         <button class="btn btn-blue" onclick="sendFeedback()">📧 Poslat nápad</button>
         <div id="qr-display" style="display:none;">
             <img src="qr.jpeg" alt="QR Platba">
-            <p>Díky! (350190916 / 0300)</p>
         </div>
     </div>
 
     <script>
-        let money = 1000000;
+        let money = 10000000000;
         let clickMoney = 0;
         let clickPower = 1;
         let upgradeCost = 50;
