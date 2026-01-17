@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Můj budoucí cash</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f0f0f0; padding: 50px; }
+        .money { font-size: 3rem; color: green; font-weight: bold; }
+        .item { background: white; padding: 20px; border-radius: 10px; display: inline-block; margin: 10px; shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        button { padding: 10px 20px; font-size: 1.2rem; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
+        button:disabled { background: #ccc; }
+        .kofi { margin-top: 50px; font-size: 0.8rem; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>Utrácej svoje budoucí prachy</h1>
+    <div class="money">Kč <span id="balance">1000000</span></div>
+    
+    <div class="item">
+        <h3>Předraženej burger</h3>
+        <p>Cena: 500 Kč</p>
+        <button onclick="buy(500)">Koupit</button>
+    </div>
+
+    <div class="item">
+        <h3>iPhone z bazaru</h3>
+        <p>Cena: 15000 Kč</p>
+        <button onclick="buy(15000)">Koupit</button>
+    </div>
+
+    <div class="kofi">
+        <p>Líbí se ti tahle blbost? Pošli mi na skutečný kafe přes <strong>Ko-fi</strong>!</p>
+        </div>
+
+    <script>
+        let money = 1000000;
+        function buy(price) {
+            if (money >= price) {
+                money -= price;
+                document.getElementById('balance').innerText = money;
+            } else {
+                alert("Jsi švorc, kámo!");
+            }
+        }
+    </script>
+</body>
+</html>
