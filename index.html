@@ -78,7 +78,7 @@
 
             <div style="margin-top: 60px;">
                 <button class="btn btn-blue" onclick="toggleQR()">🎁 Podpořit mě</button>
-                <button class="btn btn-gray" onclick="window.location.href='mailto:jinlongjou@gmail.com'">📧 Napsat mi</button>
+               <button class="f-btn" style="background: var(--accent); color: white;" onclick="sendFeedback()">📧 Poslat nápad</button> 
                 <div id="qr-area" style="display:none; margin-top: 20px;">
                     <img src="qr.jpeg" style="width: 200px; border-radius: 20px;" alt="QR">
                 </div>
@@ -265,6 +265,14 @@
         function resetGame() {
             if(state.current === 'spend') initGame('spend', 100000000000);
         }
+
+        function sendFeedback() {
+
+            alert("Bacha, teď se ti otevře e-mailový klient. Napiš mi tam, jakou máš stížnost nebo jakou další šílenost mám přidat!");
+
+            window.location.href = "mailto:jinlongjou@gmail.com?subject=Napád/Chyba pro tvoji stránku";
+
+        } 
     </script>
 </body>
 </html>
