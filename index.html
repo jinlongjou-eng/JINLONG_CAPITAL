@@ -93,7 +93,6 @@
         
         <div id="qr-display" style="display:none; margin-top: 30px; animation: popIn 0.3s;">
             <img src="qr.jpeg" style="width: 250px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" alt="QR Code">
-            <p style="font-weight: bold; margin-top: 15px; color: #666;">Díky moc! (350190916 / 0300)</p>
         </div>
     </div>
 
@@ -253,8 +252,8 @@
         function toggleQR() { const qr = document.getElementById('qr-display'); qr.style.display = qr.style.display === 'block' ? 'none' : 'block'; }
         
         function sendFeedback() {
-            alert("Bacha, teď se ti otevře e-mailový klient. Napiš mi tam, jakou další šílenost mám přidat!");
-            window.location.href = "mailto:jinlongjou@gmail.com?subject=Nápad na vylepšení miliardáře";
+            alert("Bacha, teď se ti otevře e-mailový klient. Napiš mi tam, jakou máš stížnost nebo jakou další šílenost mám přidat!");
+            window.location.href = "mailto:jinlongjou@gmail.com?subject=Napád/Chyba pro tvoji stránku";
         }
 
         function formatMoney(amount) { return amount.toLocaleString('cs-CZ') + " Kč"; }
